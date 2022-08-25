@@ -5,7 +5,7 @@ import ru.netology.repository.ProductRepository;
 import java.util.Arrays;
 
 public class ProductManager {
-    ProductRepository repo;
+    private ProductRepository repo;
 
     public ProductManager(ProductRepository repo) {
         this.repo = repo;

@@ -28,13 +28,6 @@ public class ProductManagerTest {
     }
 
     @Test
-    public void shouldFindByText() {
-        Product[] expected = {product4, product6};
-        Product[] actual = manager.searchBy("ho");
-        assertArrayEquals(expected, actual);
-    }
-
-    @Test
     public void shouldFindAllProducts() {
         Product[] expected = {product1, product2, product3, product4, product5, product6};
         Product[] actual = repo.findAll();
@@ -45,6 +38,27 @@ public class ProductManagerTest {
     public void shouldDeleteProductById() {
         Product[] expected = {product1, product2, product3, product4, product5};
         Product[] actual = repo.removeById(66);
+        assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldFindProductByText() {
+        Product[] expected = {product1};
+        Product[] actual = manager.searchBy("Код");
+        assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldFindSeveralProductsByText() {
+        Product[] expected = {product4, product6};
+        Product[] actual = manager.searchBy("ho");
+        assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldNotFindByText() {
+        Product[] expected = {};
+        Product[] actual = manager.searchBy("ы");
         assertArrayEquals(expected, actual);
     }
 }
