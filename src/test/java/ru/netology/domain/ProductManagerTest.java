@@ -28,13 +28,6 @@ public class ProductManagerTest {
     }
 
     @Test
-    public void shouldFindByName() {
-        Product[] expected = {product4, product6};
-        Product[] actual = manager.searchBy("ho");
-        assertArrayEquals(expected, actual);
-    }
-
-    @Test
     public void shouldFindAllProducts() {
         Product[] expected = {product1, product2, product3, product4, product5, product6};
         Product[] actual = repo.findAll();
@@ -49,6 +42,27 @@ public class ProductManagerTest {
     }
 
     @Test
+    public void shouldFindProductByText() {
+        Product[] expected = {product1};
+        Product[] actual = manager.searchBy("Код");
+        assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldFindSeveralProductsByText() {
+        Product[] expected = {product4, product6};
+        Product[] actual = manager.searchBy("ho");
+        assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldNotFindByText() {
+        Product[] expected = {};
+        Product[] actual = manager.searchBy("ы");
+        assertArrayEquals(expected, actual);
+    }
+
+    @Test
     public void shouldFindByAuthor() {
         Product[] expected = {product2, product3};
         Product[] actual = manager.searchBy("sy");
@@ -56,9 +70,37 @@ public class ProductManagerTest {
     }
 
     @Test
-    public void shouldFindBeManufacturer() {
+    public void shouldProductFindByAuthor() {
+        Product[] expected = {product2};
+        Product[] actual = manager.searchBy("Люс");
+        assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldNotFindByAuthor() {
+        Product[] expected = {};
+        Product[] actual = manager.searchBy("ы");
+        assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldFindSeveralProductsBeManufacturer() {
         Product[] expected = {product4, product5};
         Product[] actual = manager.searchBy("pl");
+        assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldFindProductBeManufacturer() {
+        Product[] expected = {product6};
+        Product[] actual = manager.searchBy("X");
+        assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldNotFindBeManufacturer() {
+        Product[] expected = {};
+        Product[] actual = manager.searchBy("tr");
         assertArrayEquals(expected, actual);
     }
 }
